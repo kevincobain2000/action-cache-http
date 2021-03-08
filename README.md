@@ -8,7 +8,7 @@ https://github.com/kevincobain2000/cache-http
 
 ```
     - name: Yarn Install (with cache)
-      uses: kevincobain2000/action-cache-http@v1.0.3
+      uses: kevincobain2000/action-cache-http@v2
       with:
         version: ${{ matrix.node-versions }}
         lock_file: yarn.lock
