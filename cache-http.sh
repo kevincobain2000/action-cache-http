@@ -8,7 +8,7 @@ echo INPUT_HTTP_PROXY: $INPUT_HTTP_PROXY
 echo INPUT_DESTINATION_FOLDER: $INPUT_DESTINATION_FOLDER
 echo INPUT_LOCK_FILE: $INPUT_LOCK_FILE
 echo INPUT_INSTALL_COMMAND: $INPUT_INSTALL_COMMAND
-echo CACHE_HTTP_API: $CACHE_HTTP_API
+echo INPUT_CACHE_HTTP_API: $INPUT_CACHE_HTTP_API
 
 if [ -z $INPUT_LOCK_FILE ]; then
     echo "no lock file given"
@@ -27,7 +27,7 @@ response=`curl \
     -X GET \
     -x "$INPUT_HTTP_PROXY" \
     -skI \
-    $CACHE_HTTP_API/assets/$tarFile \
+    $INPUT_CACHE_HTTP_API/assets/$tarFile \
     | head -n 1 | awk -F" " '{print $2}'`
 
 
@@ -38,7 +38,7 @@ if [ $response == 200 ]; then
         -X GET \
         -x "$INPUT_HTTP_PROXY" \
         -k \
-        $CACHE_HTTP_API/assets/$tarFile \
+        $INPUT_CACHE_HTTP_API/assets/$tarFile \
         --output $tarFile && \
     tar xzf $tarFile
     echo "Cache hit untar success"
@@ -55,7 +55,7 @@ else
         -x "$INPUT_HTTP_PROXY" \
         -k \
         --form file=@$tarFile \
-        $CACHE_HTTP_API/upload && \
+        $INPUT_CACHE_HTTP_API/upload && \
 
     echo "Cache hit upload success"
 fi
