@@ -36,9 +36,9 @@ inputs:
     required: false
 
 runs:
-  using: "node12"
-  main: "index.js"
+  using: 'node12'
+  main: 'index.js'
 
 branding:
   icon: 'check-square'
-  color: 'green'
+  color: 'purple'
