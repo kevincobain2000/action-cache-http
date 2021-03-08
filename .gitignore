@@ -12,3 +12,5 @@ _test
 *.out
 *.log
 .env
+debug.txt
+*.tar.gz
