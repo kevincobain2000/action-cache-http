@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# set -x
+set -x
 echo "Cache HTTP started"
 echo RUNNER_OS: $RUNNER_OS
 echo INPUT_VERSION: $INPUT_VERSION
