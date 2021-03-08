@@ -37,9 +37,7 @@ inputs:
 
 runs:
   using: "node12"
-  steps:
-      id: action_cache_http
-      run: "index.js"
+  main: "index.js"
 
 branding:
   icon: 'check-square'
