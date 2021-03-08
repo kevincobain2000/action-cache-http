@@ -30,8 +30,7 @@ response=`curl \
     $INPUT_CACHE_HTTP_API/assets/$tarFile \
     | head -n 1 | awk -F" " '{print $2}'`
 
-
-if [ $response == 200 ]; then
+if [ $response = "200" ] || [ $response = 200 ]; then
     echo "Cache hit"
     curl \
         -u $INPUT_BASIC_AUTH_USERNAME:$INPUT_BASIC_AUTH_PASSWORD \
