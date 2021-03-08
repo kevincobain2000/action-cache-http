@@ -1,0 +1,46 @@
+name: action-cache-http
+description: Cache dependencies over http
+
+inputs:
+  version:
+    description: What version of nodejs or main language you are using
+    default: latest
+    required: true
+
+  lock_file:
+    description: Provide the lock file path e.g yarn.lock, composer.lock
+    required: true
+
+  install_command:
+    description: What is the full install command
+    required: true
+
+  destination_folder:
+    description: destination_folder e.g. node_modules, vendor
+    required: true
+
+  cache_http_api:
+    description: Where is your cache service installed https://github.com/kevincobain2000/cache-http
+    required: true
+
+  http_proxy:
+    description: Pass proxy if any
+    required: false
+
+  basic_auth_username:
+    description: Basic auth username if any
+    required: false
+
+  basic_auth_password:
+    description: Basic auth password if any
+    required: false
+
+runs:
+  using: "node12"
+  steps:
+      id: action_cache_http
+      run: "index.js"
+
+branding:
+  icon: 'check-square'
+  color: 'green'
