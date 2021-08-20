@@ -20,7 +20,7 @@ curl \
     -u $INPUT_BASIC_AUTH_USERNAME:$INPUT_BASIC_AUTH_PASSWORD \
     -X GET \
     -x "$INPUT_HTTP_PROXY" \
-    $INPUT_CACHE_HTTP_API/health \
+    $INPUT_CACHE_HTTP_API/health
 
 shaLockfile=`openssl sha1 $INPUT_LOCK_FILE |awk '{print $2}'`
 shaInstallCommand=`echo $INPUT_INSTALL_COMMAND|openssl sha1|awk '{print $2}'`
