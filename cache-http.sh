@@ -15,10 +15,18 @@ if [ -z $INPUT_LOCK_FILE ]; then
     exit;
 fi
 
+echo "check connection"
+curl \
+    -u $INPUT_BASIC_AUTH_USERNAME:$INPUT_BASIC_AUTH_PASSWORD \
+    -X GET \
+    -x "$INPUT_HTTP_PROXY" \
+    $INPUT_CACHE_HTTP_API/health
+
 shaLockfile=`openssl sha1 $INPUT_LOCK_FILE |awk '{print $2}'`
 shaInstallCommand=`echo $INPUT_INSTALL_COMMAND|openssl sha1|awk '{print $2}'`
+shaDestinationFolder=`echo $INPUT_DESTINATION_FOLDER|openssl sha1|awk '{print $2}'`
 
-tarFile=$RUNNER_OS-$INPUT_VERSION-$shaInstallCommand-$shaLockfile.tar.gz
+tarFile=$RUNNER_OS-$INPUT_VERSION-$shaInstallCommand-$shaLockfile-$shaDestinationFolder.tar.gz
 
 echo tarfile: $tarFile
 
