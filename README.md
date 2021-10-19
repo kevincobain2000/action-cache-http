@@ -14,6 +14,7 @@ https://github.com/kevincobain2000/cache-http
         lock_file: yarn.lock
         install_command: yarn install
         destination_folder: node_modules
+        operating_dir: "./" # optional
         cache_http_api: "https://yourdomain.com/path/to/installation/cache-http"
         http_proxy: ""
 ```

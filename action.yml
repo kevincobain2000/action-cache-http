@@ -15,6 +15,10 @@ inputs:
     description: What is the full install command
     required: true
 
+  operating_dir:
+    description: Which dir to operate into (default root dir of repo)
+    required: false
+
   destination_folder:
     description: destination_folder e.g. node_modules, vendor
     required: true
