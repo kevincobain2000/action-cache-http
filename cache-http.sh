@@ -10,6 +10,7 @@ echo INPUT_LOCK_FILE: $INPUT_LOCK_FILE
 echo INPUT_INSTALL_COMMAND: $INPUT_INSTALL_COMMAND
 echo INPUT_CACHE_HTTP_API: $INPUT_CACHE_HTTP_API
 echo INPUT_OPERATING_DIR: $INPUT_OPERATING_DIR
+echo INPUT_DISABLE_COMPRESSION: $INPUT_DISABLE_COMPRESSION
 
 if [ -z $INPUT_LOCK_FILE ]; then
     echo "no lock file given"
@@ -19,6 +20,13 @@ fi
 if [ -n $INPUT_OPERATING_DIR ]; then
     cd $INPUT_OPERATING_DIR
 fi
+
+COMPRESS_FLAG='z'
+
+if [ -n "$INPUT_DISABLE_COMPRESSION" ]; then
+  COMPRESS_FLAG=''
+fi
+
 
 echo "check connection"
 curl \
@@ -52,12 +60,12 @@ if [ $response = "200" ] || [ $response = 200 ]; then
         -k \
         $INPUT_CACHE_HTTP_API/assets/$tarFile \
         --output $tarFile && \
-    tar xzf $tarFile
+    tar "${COMPRESS_FLAG}xf" $tarFile
     echo "Cache hit untar success"
 else
     echo "Cache hit miss"
     $INPUT_INSTALL_COMMAND && \
-    tar zcf $tarFile $INPUT_DESTINATION_FOLDER && \
+    tar "${COMPRESS_FLAG}cf" $tarFile $INPUT_DESTINATION_FOLDER && \
 
     echo "Cache hit uploading" && \
 
