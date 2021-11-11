@@ -12,13 +12,13 @@ echo INPUT_CACHE_HTTP_API: $INPUT_CACHE_HTTP_API
 echo INPUT_OPERATING_DIR: $INPUT_OPERATING_DIR
 echo INPUT_DISABLE_COMPRESSION: $INPUT_DISABLE_COMPRESSION
 
-if [ -z $INPUT_LOCK_FILE ]; then
+if [ -z "$INPUT_LOCK_FILE" ]; then
     echo "no lock file given"
     exit;
 fi
 
-if [ -n $INPUT_OPERATING_DIR ]; then
-    cd $INPUT_OPERATING_DIR
+if [ -n "$INPUT_OPERATING_DIR" ]; then
+    cd "$INPUT_OPERATING_DIR"
 fi
 
 COMPRESS_FLAG='z'
@@ -30,12 +30,12 @@ fi
 
 echo "check connection"
 curl \
-    -u $INPUT_BASIC_AUTH_USERNAME:$INPUT_BASIC_AUTH_PASSWORD \
+    -u "$INPUT_BASIC_AUTH_USERNAME:$INPUT_BASIC_AUTH_PASSWORD" \
     -X GET \
     -x "$INPUT_HTTP_PROXY" \
     $INPUT_CACHE_HTTP_API/health
 
-shaLockfile=`openssl sha1 $INPUT_LOCK_FILE |awk '{print $2}'`
+shaLockfile=`openssl sha1 "$INPUT_LOCK_FILE" |awk '{print $2}'`
 shaInstallCommand=`echo $INPUT_INSTALL_COMMAND|openssl sha1|awk '{print $2}'`
 shaDestinationFolder=`echo $INPUT_DESTINATION_FOLDER|openssl sha1|awk '{print $2}'`
 
