@@ -19,6 +19,10 @@ inputs:
     description: Which dir to operate into (default root dir of repo)
     required: false
 
+  disable_compression:
+    description: Set to `true` to disable compression to improve performance. Uses more storage.
+    required: false
+
   destination_folder:
     description: destination_folder e.g. node_modules, vendor
     required: true
