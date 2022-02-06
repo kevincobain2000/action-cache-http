@@ -61,13 +61,13 @@ if [ $response = "200" ] || [ $response = 200 ]; then
         $INPUT_CACHE_HTTP_API/assets/$tarFile \
         --output $tarFile && \
     tar "${COMPRESS_FLAG}xf" $tarFile
-    echo "Cache hit untar success"
+    echo "Cache hit, untar success"
 else
-    echo "Cache hit miss"
+    echo "Cache miss"
     $INPUT_INSTALL_COMMAND && \
     tar "${COMPRESS_FLAG}cf" $tarFile $INPUT_DESTINATION_FOLDER && \
 
-    echo "Cache hit uploading" && \
+    echo "Cache miss, uploading" && \
 
     curl \
         -u $INPUT_BASIC_AUTH_USERNAME:$INPUT_BASIC_AUTH_PASSWORD \
@@ -77,5 +77,5 @@ else
         --form file=@$tarFile \
         $INPUT_CACHE_HTTP_API/upload && \
 
-    echo "Cache hit upload success"
+    echo "Cache miss, upload success"
 fi
