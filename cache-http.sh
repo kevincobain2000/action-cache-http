@@ -35,9 +35,9 @@ curl \
     -x "$INPUT_HTTP_PROXY" \
     "$INPUT_CACHE_HTTP_API/health"
 
-shaLockfile=$(openssl sha1 "$INPUT_LOCK_FILE" |awk '{print $2}')
-shaInstallCommand=$(echo "$INPUT_INSTALL_COMMAND"|openssl sha1|awk '{print $2}')
-shaDestinationFolder=$(echo "$INPUT_DESTINATION_FOLDER"|openssl sha1|awk '{print $2}')
+shaLockfile=$(openssl sha256 "$INPUT_LOCK_FILE" |awk '{print $2}')
+shaInstallCommand=$(echo "$INPUT_INSTALL_COMMAND"|openssl sha256|awk '{print $2}')
+shaDestinationFolder=$(echo "$INPUT_DESTINATION_FOLDER"|openssl sha256|awk '{print $2}')
 
 tarFile="$RUNNER_OS-$INPUT_VERSION-$shaInstallCommand-$shaLockfile-$shaDestinationFolder.tar.gz"
 
